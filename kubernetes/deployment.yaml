@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: AuthorService
+  name: AuthorService
+  labels:
+    app: AuthorService
+spec:
+  selector:
+    matchLabels:
+      app: AuthorService
+  template:
+    metadata:
+      labels:
+        app: AuthorService
+        name: AuthorService
+    spec:
+      containers:
+        - name: AuthorService
+          image: MrAzharuddin/book-store-backend/AuthorService
+          imagePullPolicy: Always
+          ports:
+        
+          - containerPort: 8001
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        

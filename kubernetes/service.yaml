@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: AuthorService
+  labels:
+    app: AuthorService
+  name: AuthorService
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+   
+  selector:
+    app: AuthorService
+  type: ClusterIP
